@@ -17,10 +17,60 @@ body {
   font-size: 14px;
   background: #e9eaec;
 }
+img {
+  width: 100%;
+}
+
+/* Header */
+
+.header {
+  position: relative;
+  margin: 0;
+  height: 200px;
+  color: white;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.73);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header img {
+  position: absolute;
+  right: 0;
+  z-index: -1;
+  object-fit: cover;
+  object-position: 50% 21%;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 3rem 0 8rem;
+}
+.hero__watchlist {
+  margin-right: 5rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.hero__watchlist:hover {
+  opacity: 0.8;
+}
+
 @media screen and (min-width: 600px) {
   body {
     width: auto;
     max-width: 100%;
     margin-left: auto;
+  }
+  .hero-title {
+    margin: 0 2rem;
+  }
+  .header {
+    height: 250px;
   }
 }
