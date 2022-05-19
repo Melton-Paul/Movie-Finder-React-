@@ -1,14 +1,29 @@
 import heroImg from "../images/heroimg.jpg"
+import React from "react"
+import MovieCard from "./MovieCard"
 
 export default function Watchlist(props){
     console.log(props.watchlistHtml)
+    const [watchlistHtml, setWatchlistHtml] = React.useState([])
 
 
-    
+    React.useEffect(()=>{
+        JSON.parse(window.localStorage.getItem("watchlist")).forEach(id => {
+            fetch(`https://www.omdbapi.com/?apikey=9980ac75&i=${id}&`)
+                .then(res => res.json())
+                .then(data => {
+                    setWatchlistHtml(prev => [...prev, data])
+                })
+        })
+    }, [props.watchlistPage])
 
-    const watchlistHtml = props.watchlistStorage.map(id => {
-
+    const html = watchlistHtml.map(movie => {
+        return <MovieCard props={{...movie}} removeStorage={props.removeStorage} watchlistRender={true} />
     })
+
+
+
+
 
     return (
     <div className="watchlis-page">
@@ -20,7 +35,7 @@ export default function Watchlist(props){
             </div>
         </header>
         <main>
-            {props.watchlistHtml}
+            {html}
         </main>
     </div>)
 }

@@ -13,7 +13,7 @@ export default function App() {
   const [watchlistHtml, setWatchlistHtml] = React.useState("")
   const [watchlist, setWatchlist] = React.useState([])
   const [movieHtml, setMovieHtml] = React.useState("")
-  const [watchlistPage, setWatchlistPage ] = React.useState(false)
+  const [watchlistPage, setWatchlistPage ] = React.useState(JSON.parse(window.localStorage.getItem("page")))
   let typingTimer
   console.log(watchlistStorage)
   console.log(localStorage)
@@ -33,7 +33,7 @@ export default function App() {
             })
           })
           setMovies(movieList)
-          getHTML(setMovieHtml, movies)
+          getHTML()
         })
     }, [searchMemory])
 
@@ -53,11 +53,10 @@ export default function App() {
     console.log(watchlistHtml)
     
     
-    function getHTML(setOption, arr){
-      const watchlistRender = setOption === setMovieHtml ? false : true
-      setOption(()=>{
-        return arr.map(movie => {
-          return <MovieCard props={{...movie}} addStorage={addStorage} removeStorage={removeStorage} watchlistRender={watchlistRender}/>
+    function getHTML(){
+      setMovieHtml(()=>{
+        return movies.map(movie => {
+          return <MovieCard props={{...movie}} addStorage={addStorage} removeStorage={removeStorage} watchlistRender={false}/>
         })
       }) 
 
@@ -117,6 +116,7 @@ export default function App() {
       // })
       // window.localStorage.setItem("watchlist", watchlistStorage)
     }
+    window.localStorage.setItem("page", JSON.stringify(watchlistPage))
   return (
     <div>
       {watchlistPage ? 
