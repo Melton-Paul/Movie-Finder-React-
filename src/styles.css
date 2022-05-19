@@ -60,6 +60,125 @@ img {
 .hero__watchlist:hover {
   opacity: 0.8;
 }
+/* Main */
+main {
+  margin-top: 4rem;
+}
+
+.movie-container {
+  display: flex;
+  justify-content: row;
+  border-bottom: 1px solid #6b7280;
+  margin: 1rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.movie-header {
+  display: flex;
+  align-items: center;
+}
+.movie-header .fa-star {
+  margin: 0 0.3rem 0 0.6rem;
+  margin-top: 0.8rem;
+  color: gold;
+}
+.movie-content {
+  margin-left: 1rem;
+}
+.movie-tags {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.movie-tag {
+  margin-right: 0.2rem;
+}
+.movie-desc {
+  color: #6b7280;
+}
+
+.movie-img {
+  width: 100px;
+  height: 170px;
+}
+.watchlist-add {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.watchlist-add .fa-plus {
+  margin-top: 0.8rem;
+}
+.watchlist-add p {
+  margin-left: 0.5rem;
+}
+.watchlist-add:hover {
+  color: gold;
+}
+@media screen and (min-width: 800px) {
+  .movie-tags {
+    width: 463px;
+  }
+}
+/* Input Group */
+#searchBar {
+  border: none;
+}
+.input-group {
+  border: 1px solid #d1d5db;
+  width: 300px;
+  height: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.input-group input {
+  flex-grow: 1;
+  height: 100%;
+  padding: 0 0.5rem;
+  outline: none;
+  color: #6b7280;
+  margin: 0 8px;
+}
+.input-group .fa-search {
+  color: black;
+  opacity: 0.6;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+.input-group .btn {
+  height: 100%;
+  width: 128px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+@media screen and (min-width: 440px) {
+  .input-group {
+    width: 435px;
+  }
+}
+
+/* Utility */
+
+.container {
+  max-width: 450px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 1040px) {
+  .container {
+    max-width: 1040px;
+  }
+}
 
 @media screen and (min-width: 600px) {
   body {
@@ -72,5 +191,9 @@ img {
   }
   .header {
     height: 250px;
+  }
+  .input-group {
+    width: 435px;
+    top: 230px;
   }
 }
