@@ -9,10 +9,14 @@ export default function App() {
   const [movies, setMovies] = React.useState([])
   const [searchValue, setSearchValue] = React.useState("")
   const [searchMemory, setSearchMemory] = React.useState("")
+  const [watchlistStorage, setWatchlistStorage] = React.useState(JSON.parse(localStorage.getItem("watchlist")))
+  const [watchlistHtml, setWatchlistHtml] = React.useState("")
+  const [watchlist, setWatchlist] = React.useState([])
   const [movieHtml, setMovieHtml] = React.useState("")
   const [watchlistPage, setWatchlistPage ] = React.useState(false)
   let typingTimer
-
+  console.log(watchlistStorage)
+  console.log(localStorage)
   React.useEffect(()=>{
     if(!searchValue){
       return 
@@ -29,18 +33,33 @@ export default function App() {
             })
           })
           setMovies(movieList)
-          getHTML()
+          getHTML(setMovieHtml, movies)
         })
     }, [searchMemory])
+
+    React.useEffect(()=>{
+      let movieList = []
+      watchlistStorage.forEach(id => {
+        fetch(`https://www.omdbapi.com/?apikey=9980ac75&i=${id}&`)
+          .then(res => res.json())
+          .then(data => {
+            movieList.push(data)
+          })
+          setWatchlist(movieList)
+          getHTML(setWatchlistHtml, watchlist)
+      })
+
+    }, [watchlistStorage])
+    console.log(watchlistHtml)
     
     
-    function getHTML(){
-      if(movies){
-      setMovieHtml(()=>{
-        return movies.map(movie => {
-          return <MovieCard props={{...movie}} />
+    function getHTML(setOption, arr){
+      setOption(()=>{
+        return arr.map(movie => {
+          return <MovieCard props={{...movie}} addStorage={addStorage} removeStorage={removeStorage}/>
         })
-      }) }
+      }) 
+
     }
     
     function handleChange(event){
@@ -74,11 +93,26 @@ export default function App() {
           )
     }}
 
+    function addStorage(id){
+      setWatchlistStorage(prev => {
+        return [...prev, id]
+      })
+      window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
+    }
+
+    function removeStorage(id){
+      setWatchlistStorage(prev => {
+        return prev.map(movie => {
+          return movie.imdbID === id ? "" : [...prev, movie] 
+        })
+      })
+      window.localStorage.setItem("watchlist", watchlistStorage)
+    }
 
   return (
     <div>
       {watchlistPage ? 
-      <Watchlist setWatchlistPage={setWatchlistPage} /> : 
+      <Watchlist setWatchlistPage={setWatchlistPage} watchlistStorage={watchlistStorage} removeStorage={removeStorage} MovieCard={MovieCard} watchlistHtml={watchlistHtml} /> : 
       <FindFilms handleChange={handleChange} searchValue={searchValue} setWatchlistPage={setWatchlistPage} html={html} />}
     </div>
   )
