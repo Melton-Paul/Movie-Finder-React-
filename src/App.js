@@ -99,24 +99,26 @@ export default function App() {
       })
     }
     window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
-
+    
     function removeStorage(id){
-        console.log("removed")
-        const location = watchlistStorage.indexOf(id)
-        const arr = watchlistStorage
-        const spliced = arr.splice(location, 1)
-        setWatchlistStorage(spliced)
-        // window.localStorage.setItem("watchlist", watchlistStorage)
-        // console.log(location)
-      // setWatchlistStorage(prev => {
-      //   return prev.map(movie => {
-      //     console.log( movie.imdbID === id ? [...prev] : [...prev, movie] )
-      //     return [...prev, movie]
-      //   })
-      // })
+      console.log("removed")
+      const location = watchlistStorage.indexOf(id)
+      const arr = watchlistStorage
+      arr.splice(location, 1)
+      setWatchlistStorage(arr)
+      window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
+      document.location.reload()
       // window.localStorage.setItem("watchlist", watchlistStorage)
-    }
-    window.localStorage.setItem("page", JSON.stringify(watchlistPage))
+      // console.log(location)
+      // setWatchlistStorage(prev => {
+        //   return prev.map(movie => {
+          //     console.log( movie.imdbID === id ? [...prev] : [...prev, movie] )
+          //     return [...prev, movie]
+          //   })
+          // })
+        }
+          window.localStorage.setItem("page", JSON.stringify(watchlistPage))
+          // window.localStorage.setItem("watchlist", watchlistStorage)
   return (
     <div>
       {watchlistPage ? 
