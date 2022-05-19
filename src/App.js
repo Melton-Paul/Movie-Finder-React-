@@ -9,7 +9,7 @@ export default function App() {
   const [movies, setMovies] = React.useState([])
   const [searchValue, setSearchValue] = React.useState("")
   const [searchMemory, setSearchMemory] = React.useState("")
-  const [watchlistStorage, setWatchlistStorage] = React.useState(JSON.parse(localStorage.getItem("watchlist")))
+  const [watchlistStorage, setWatchlistStorage] = React.useState(JSON.parse(window.localStorage.getItem("watchlist")) || [])
   const [watchlistHtml, setWatchlistHtml] = React.useState("")
   const [watchlist, setWatchlist] = React.useState([])
   const [movieHtml, setMovieHtml] = React.useState("")
@@ -49,14 +49,15 @@ export default function App() {
           getHTML(setWatchlistHtml, watchlist)
       })
 
-    }, [watchlistStorage])
+    }, [watchlistPage])
     console.log(watchlistHtml)
     
     
     function getHTML(setOption, arr){
+      const watchlistRender = setOption === setMovieHtml ? false : true
       setOption(()=>{
         return arr.map(movie => {
-          return <MovieCard props={{...movie}} addStorage={addStorage} removeStorage={removeStorage}/>
+          return <MovieCard props={{...movie}} addStorage={addStorage} removeStorage={removeStorage} watchlistRender={watchlistRender}/>
         })
       }) 
 
@@ -97,18 +98,25 @@ export default function App() {
       setWatchlistStorage(prev => {
         return [...prev, id]
       })
-      window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
     }
+    window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
 
     function removeStorage(id){
-      setWatchlistStorage(prev => {
-        return prev.map(movie => {
-          return movie.imdbID === id ? "" : [...prev, movie] 
-        })
-      })
-      window.localStorage.setItem("watchlist", watchlistStorage)
+        console.log("removed")
+        const location = watchlistStorage.indexOf(id)
+        const arr = watchlistStorage
+        const spliced = arr.splice(location, 1)
+        setWatchlistStorage(spliced)
+        // window.localStorage.setItem("watchlist", watchlistStorage)
+        // console.log(location)
+      // setWatchlistStorage(prev => {
+      //   return prev.map(movie => {
+      //     console.log( movie.imdbID === id ? [...prev] : [...prev, movie] )
+      //     return [...prev, movie]
+      //   })
+      // })
+      // window.localStorage.setItem("watchlist", watchlistStorage)
     }
-
   return (
     <div>
       {watchlistPage ? 
