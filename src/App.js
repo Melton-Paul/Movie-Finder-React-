@@ -1,7 +1,8 @@
 import React from "react"
-import heroImg from "./images/heroimg.jpg"
-import MovieCard from "./MovieCard"
+import MovieCard from "./components/MovieCard"
 import loadingImg from "./images/30+fps.gif"
+import Watchlist from "./components/Watchlist"
+import FindFilms from "./components/FindFilms"
 
 export default function App() {
   const [loading, setLoading] = React.useState(false)
@@ -9,6 +10,7 @@ export default function App() {
   const [searchValue, setSearchValue] = React.useState("")
   const [searchMemory, setSearchMemory] = React.useState("")
   const [movieHtml, setMovieHtml] = React.useState("")
+  const [watchlistPage, setWatchlistPage ] = React.useState(false)
   let typingTimer
 
   React.useEffect(()=>{
@@ -49,9 +51,6 @@ export default function App() {
         setSearchMemory(searchValue)
         setLoading(false)
       }, 1500)
-
-
-
     }
 
     function html(){ 
@@ -78,21 +77,9 @@ export default function App() {
 
   return (
     <div>
-      <header className="header">
-          <img className="hero-img" src={heroImg} />
-          <div className="hero-title">
-            <h1>Find Your Film</h1>
-            <h2 className="hero__watchlist">My Watchlist</h2>
-          </div>
-          <div className="input-group">
-                <i class="fa fa-search"></i>
-                <input type="text" id="searchBar" placeholder="What are you looking for?" onChange={handleChange} value={searchValue} autoFocus />
-                <button className="btn" type="submit" id="searchBtn">Search</button>
-            </div>
-      </header>
-      <main> 
-        {html()}
-      </main>
+      {watchlistPage ? 
+      <Watchlist setWatchlistPage={setWatchlistPage} /> : 
+      <FindFilms handleChange={handleChange} searchValue={searchValue} setWatchlistPage={setWatchlistPage} html={html} />}
     </div>
   )
 }
