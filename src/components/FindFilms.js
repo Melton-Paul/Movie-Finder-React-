@@ -1,6 +1,9 @@
 import heroImg from "../images/heroimg.jpg"
+import React from "react"
+
 
 export default function FindFilms(props){
+
     return (
         <div className="findfilms-page">
             <header className="header">

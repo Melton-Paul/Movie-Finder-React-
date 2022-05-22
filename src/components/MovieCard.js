@@ -1,6 +1,15 @@
-
+import React from "react"
 export default function MovieCard(props){
+    console.log(props.watchlistStorage)
     const {Poster, Title, imdbRating, Runtime, Genre, Plot, imdbID} = props.props
+    console.log(imdbID)
+    const [watchlistStorage, setWatchlistStorage] = React.useState(props.watchlistStorage)
+    const [inWatchlist, setInWatchlist] = React.useState(watchlistStorage.includes(imdbID) ? true : false)
+    function toggle(){
+        setInWatchlist(prev => !prev)
+        inWatchlist ?  props.removeStorage(imdbID) : props.addStorage(imdbID)
+    }
+    
     return (
     <div className="movie-container container">
         <img className="movie-img" src={Poster} alt="A poster of the movie" />
@@ -13,9 +22,9 @@ export default function MovieCard(props){
             <div className="movie-tags">
                 <p className="movie-tag movie-time clear__bottom">{Runtime}</p>
                 <p className="movie-tag movie-category clear__bottom">{Genre}</p>
-                <div className=" movie-tag watchlist-add " onClick={()=>{props.watchlistRender ?  props.removeStorage(imdbID) : props.addStorage(imdbID)}} id="${imdbID}" >
+                <div className=" movie-tag watchlist-add " onClick={toggle} id="${imdbID}" >
                 <i className="fa fa-plus"></i>
-                <p className="clear__bottom">{props.watchlistRender ? "Remove from Watchlist" : "Add to Watchlist"}</p>
+                <p className="clear__bottom">{inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}</p>
                 </div>
             </div>
             <div className="movie-desc">

@@ -18,9 +18,9 @@ export default function Watchlist(props){
     }, [props.watchlistPage])
 
     const html = watchlistHtml.map(movie => {
-        return <MovieCard props={{...movie}} removeStorage={props.removeStorage} watchlistRender={true} />
+        console.log(movie.imdbId)
+        return <MovieCard props={{...movie}} removeStorage={props.removeStorage} watchlistStorage={props.watchlistStorage} />
     })
-
 
 
 
