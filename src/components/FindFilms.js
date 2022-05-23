@@ -8,6 +8,7 @@ export default function FindFilms(props){
     const [movies, setMovies] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [movieHtml, setMovieHtml] = React.useState("")
+    const [error, setError] = React.useState(false)
     let typingTimer
 
 
@@ -24,6 +25,12 @@ export default function FindFilms(props){
           fetch(`https://www.omdbapi.com/?apikey=9980ac75&s=${searchValue}`)
             .then(res => res.json())
             .then(data => {
+                if(data.Response === "False"){
+                    setError(true)
+                    setTimeout(() => {
+                        setError(false)
+                    }, 1000);
+                }
               let movieList = []
               data.Search.forEach(movie=>{
                 fetch(`https://www.omdbapi.com/?apikey=9980ac75&t=${movie.Title}`)
@@ -58,6 +65,14 @@ export default function FindFilms(props){
                 }, 2500)
               }
               function html(){ 
+                  if(error){
+                      return (
+                        <div id="noData">
+                            <h2>OOPS!</h2>
+                        <p>Nothing was found, check your spelling!</p>
+                      </div>
+                      )
+                  }
                 if(searchValue){
                   if(loading){
                     return ( 
@@ -69,7 +84,7 @@ export default function FindFilms(props){
                   } else {
                     return movieHtml
                   }
-                  } else {
+                  } else  {
                     return (
                       <div id="noData">
                         <i className="fa fa-film fa-6x"></i>
