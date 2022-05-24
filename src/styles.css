@@ -203,6 +203,10 @@ main {
     width: 435px;
   }
 }
+/* Watchlist Page */
+.watchlist-page #noData {
+  cursor: pointer;
+}
 
 /* Utility */
 

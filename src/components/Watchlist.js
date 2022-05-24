@@ -3,7 +3,6 @@ import React from "react"
 import MovieCard from "./MovieCard"
 
 export default function Watchlist(props){
-    console.log(props.watchlistHtml)
     const [watchlistHtml, setWatchlistHtml] = React.useState([])
 
 
@@ -18,15 +17,13 @@ export default function Watchlist(props){
     }, [props.watchlistPage])
 
     const html = watchlistHtml.map(movie => {
-        console.log(movie.imdbId)
         return <MovieCard props={{...movie}} removeStorage={props.removeStorage} watchlistStorage={props.watchlistStorage} />
     })
 
 
 
-
     return (
-    <div className="watchlis-page">
+    <div className="watchlist-page">
         <header className="header">
             <img className="hero-img" src={heroImg} />
             <div className="hero-title">
@@ -35,7 +32,13 @@ export default function Watchlist(props){
             </div>
         </header>
         <main>
-            {html}
+            {watchlistHtml.length > 0  ? 
+                html : 
+                <div id="noData" onClick={()=>props.setWatchlistPage(prev => !prev )}>
+                    <i className="fa fa-film fa-6x"></i>
+                    <p>Start Exploring</p>
+                    <p>No films in your list yet!</p>
+                </div> }
         </main>
     </div>)
 }

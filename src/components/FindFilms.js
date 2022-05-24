@@ -12,11 +12,6 @@ export default function FindFilms(props){
     let typingTimer
 
 
-
-
-
-
-
     React.useEffect(()=>{
 
         if(!searchValue){
@@ -26,10 +21,9 @@ export default function FindFilms(props){
             .then(res => res.json())
             .then(data => {
                 if(data.Response === "False"){
-                    setError(true)
-                    setTimeout(() => {
-                        setError(false)
-                    }, 1000);
+                  throw Error("No Movie Found")
+                } else {
+                  setError(false)
                 }
               let movieList = []
               data.Search.forEach(movie=>{
@@ -37,26 +31,30 @@ export default function FindFilms(props){
                 .then(res => res.json())
                 .then(data => {
                   movieList.push(data)
-                  console.log(data)
                   setMovies(movieList)
                   getHTML()
                 })
               })
-              console.log(movieList)
-              console.log(movies)
+            })
+            .catch(err => {
+              setError(true)
             })
         }, [loading])
+
+        function enterKey(e){
+          if (e.key === 'Enter'){
+            handleChange()
+          }
+        }
         
         function getHTML(){
             const movieArr = movies.map(movie => {
-              return <MovieCard props={{...movie}} addStorage={props.addStorage} watchlistStorage={props.watchlistStorage} removeStorage={props.removeStorage} />})
-              console.log(movieArr)
+              return <MovieCard props={{...movie}} addStorage={props.addStorage} watchlistStorage={props.watchlistStorage} removeStorage={props.removeStorage} key={movie.imdbID} />})
             setMovieHtml(movieArr)
             }
 
             function handleChange(){
                 const search = document.getElementById("searchBar")
-                console.log(search.value)
                 clearTimeout(typingTimer)
                 setLoading(true)
                 setSearchValue(search.value)
@@ -101,11 +99,11 @@ export default function FindFilms(props){
                 <img className="hero-img" src={heroImg} />
                 <div className="hero-title">
                 <h1>Find films</h1>
-                <h2 className="hero__watchlist" onClick={()=>props.setWatchlistPage(prev => !prev)}>My Watchlist</h2>
+                <h2 className="hero__watchlist"  onClick={()=>props.setWatchlistPage(prev => !prev)}>My Watchlist</h2>
                 </div>
                 <div className="input-group">
                     <i className="fa fa-search"></i>
-                    <input type="text" id="searchBar" placeholder="What are you looking for?" autoFocus />
+                    <input type="text" id="searchBar" placeholder="What are you looking for?" autoFocus onKeyPress={(e) => e.key === 'Enter' && handleChange()} />
                     <button className="btn" type="submit" id="searchBtn" onClick={handleChange}>Search</button>
                 </div>
             </header>

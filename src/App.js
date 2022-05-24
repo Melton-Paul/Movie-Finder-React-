@@ -13,8 +13,6 @@ export default function App() {
   // const [movieHtml, setMovieHtml] = React.useState("")
   const [watchlistPage, setWatchlistPage ] = React.useState(JSON.parse(window.localStorage.getItem("page")))
   let typingTimer
-  console.log(watchlistStorage)
-  console.log(localStorage)
   // React.useEffect(()=>{
   //   if(!searchValue){
   //     return 
@@ -85,7 +83,6 @@ export default function App() {
   }
   
   function removeStorage(id){
-    console.log("removed")
     const location = watchlistStorage.indexOf(id)
     const arr = watchlistStorage
     arr.splice(location, 1)
