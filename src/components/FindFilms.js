@@ -98,7 +98,7 @@ export default function FindFilms(props){
             <header className="header">
                 <img className="hero-img" src={heroImg} />
                 <div className="hero-title">
-                <h1>Find films</h1>
+                <h1>Find your film</h1>
                 <h2 className="hero__watchlist"  onClick={()=>props.setWatchlistPage(prev => !prev)}>My Watchlist</h2>
                 </div>
                 <div className="input-group">

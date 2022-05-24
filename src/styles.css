@@ -208,6 +208,9 @@ main {
   cursor: pointer;
 }
 
+.watchlist-page .hero-title {
+  font-size: 0.8rem;
+}
 /* Utility */
 
 .container {
@@ -229,11 +232,21 @@ main {
   .hero-title {
     margin: 0 2rem;
   }
+
   .header {
     height: 250px;
   }
   .input-group {
     width: 435px;
     top: 230px;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .hero-title h1 {
+    font-size: 3.8rem;
+  }
+  .hero__watchlist {
+    font-size: 1.8rem;
   }
 }
