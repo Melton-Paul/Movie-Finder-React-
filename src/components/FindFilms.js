@@ -38,14 +38,10 @@ export default function FindFilms(props){
             })
             .catch(err => {
               setError(true)
+              console.log(err)
             })
         }, [loading])
 
-        function enterKey(e){
-          if (e.key === 'Enter'){
-            handleChange()
-          }
-        }
         
         function getHTML(){
             const movieArr = movies.map(movie => {

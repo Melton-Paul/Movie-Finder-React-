@@ -33,7 +33,6 @@ img {
   background: rgba(0, 0, 0, 0.73);
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .header img {
