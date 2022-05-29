@@ -5,6 +5,7 @@ import MovieCard from "./MovieCard"
 
 export default function FindFilms(props){
     const [searchValue, setSearchValue] = React.useState("")
+    const [searchMemory, setSearchMemory] = React.useState("")
     const [movies, setMovies] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [movieHtml, setMovieHtml] = React.useState("")
@@ -45,7 +46,7 @@ export default function FindFilms(props){
               setError(true)
               console.log(err)
             })
-        }, [loading])
+        }, [searchMemory])
 
         
         function getHTML(){
@@ -54,12 +55,13 @@ export default function FindFilms(props){
             setMovieHtml(movieArr)
             }
 
-            function handleChange(){
-                const search = document.getElementById("searchBar")
+            function handleChange(e){
+                const search = e.target.value
                 clearTimeout(typingTimer)
                 setLoading(true)
-                setSearchValue(search.value)
+                setSearchValue(search)
                 typingTimer = setTimeout(()=>{ 
+                  setSearchMemory(searchValue)
                   setLoading(false)
                 }, 2500)
               }
@@ -103,8 +105,8 @@ export default function FindFilms(props){
                 <h2 className="hero__watchlist"  onClick={()=>props.setWatchlistPage(prev => !prev)}>My Watchlist</h2>
                 </div>
                 <div className="input-group">
+                    <input type="text" id="searchBar" placeholder="What are you looking for?" value={searchValue} onChange={handleChange} autoFocus  />
                     <i className="fa fa-search"></i>
-                    <input type="text" id="searchBar" placeholder="What are you looking for?" autoFocus onKeyPress={(e) => e.key === 'Enter' && handleChange()} />
                     <button className="btn" type="submit" id="searchBtn" onClick={handleChange}>Search</button>
                 </div>
             </header>
