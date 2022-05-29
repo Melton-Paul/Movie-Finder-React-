@@ -105,8 +105,8 @@ export default function FindFilms(props){
                 <h2 className="hero__watchlist"  onClick={()=>props.setWatchlistPage(prev => !prev)}>My Watchlist</h2>
                 </div>
                 <div className="input-group">
-                    <input type="text" id="searchBar" placeholder="What are you looking for?" value={searchValue} onChange={handleChange} autoFocus  />
                     <i className="fa fa-search"></i>
+                    <input type="text" id="searchBar" placeholder="What are you looking for?" value={searchValue} onChange={handleChange} autoFocus  />
                     <button className="btn" type="submit" id="searchBtn" onClick={handleChange}>Search</button>
                 </div>
             </header>
