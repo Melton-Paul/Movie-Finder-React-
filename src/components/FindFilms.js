@@ -69,9 +69,9 @@ export default function FindFilms(props){
                   if(error){
                       return (
                         <div id="noData">
-                            <h2>OOPS!</h2>
-                        <p>Nothing was found, check your spelling!</p>
-                      </div>
+                          <h2>OOPS!</h2>
+                          <p>Nothing was found, check your spelling!</p>
+                        </div>
                       )
                   }
                 if(searchValue){
