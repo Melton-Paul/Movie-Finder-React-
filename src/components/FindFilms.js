@@ -30,9 +30,14 @@ export default function FindFilms(props){
                 fetch(`https://www.omdbapi.com/?apikey=9980ac75&t=${movie.Title}`)
                 .then(res => res.json())
                 .then(data => {
-                  movieList.push(data)
-                  setMovies(movieList)
-                  getHTML()
+                  if(movieList.some(movie => movie.imdbID === data.imdbID)){
+                    return
+                  } 
+                  else {
+                    movieList.push(data)
+                    setMovies(movieList)
+                    getHTML()
+                  }
                 })
               })
             })
