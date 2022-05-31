@@ -4,6 +4,7 @@ import MovieCard from "./MovieCard"
 import loadingImg from "../images/30+fps.gif"
 
 
+
 export default function FindFilms(props){
     const [searchValue, setSearchValue] = React.useState("")
     const [searchMemory, setSearchMemory] = React.useState("")
@@ -108,7 +109,7 @@ export default function FindFilms(props){
                 <div className="input-group">
                     <i className="fa fa-search"></i>
                     <input type="text" id="searchBar" placeholder="What are you looking for?" value={searchValue} onChange={handleChange} autoFocus  />
-                    <button className="btn" type="submit" id="searchBtn" onClick={handleChange}>Search</button>
+                    <button className="btn" type="submit" id="searchBtn">Search</button>
                 </div>
             </header>
             <main> 

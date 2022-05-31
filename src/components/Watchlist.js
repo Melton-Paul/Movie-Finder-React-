@@ -37,7 +37,7 @@ export default function Watchlist(props){
                 <div id="noData" onClick={()=>props.setWatchlistPage(prev => !prev )}>
                     <i className="fa fa-film fa-6x"></i>
                     <p>Start Exploring</p>
-                    <p>No films in your list yet!</p>
+                    <p>No films in your list</p>
                 </div> }
         </main>
     </div>)
