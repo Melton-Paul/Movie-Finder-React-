@@ -3,6 +3,7 @@ import React from "react"
 export default function usePageLogic(){
     const [watchlistStorage, setWatchlistStorage] = React.useState(JSON.parse(window.localStorage.getItem("watchlist")) || [])
     const [watchlistPage, setWatchlistPage ] = React.useState(JSON.parse(window.localStorage.getItem("page")))
+    
 
     function addStorage(id){
         setWatchlistStorage(prev => {

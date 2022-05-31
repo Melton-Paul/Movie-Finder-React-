@@ -3,8 +3,14 @@ import Watchlist from "./components/Watchlist"
 import FindFilms from "./components/FindFilms"
 import usePageLogic from "./hooks/usePageLogic"
 
+
 export default function App() {
-  const {setWatchlistPage, watchlistStorage, removeStorage, addStorage, watchlistPage} =  usePageLogic()
+  const {
+    setWatchlistPage, 
+    watchlistStorage, 
+    removeStorage, 
+    addStorage, 
+    watchlistPage} =  usePageLogic()
 
   return (
     <div>

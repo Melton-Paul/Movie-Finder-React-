@@ -47,7 +47,7 @@ export default function FindFilms(props){
               setError(true)
               console.log(err)
             })
-        }, [searchMemory])
+        }, [searchMemory, searchValue])
 
         
         function getHTML(){
@@ -67,7 +67,7 @@ export default function FindFilms(props){
                 }, 2500)
               }
               function html(){ 
-                  if(error){
+                  if(error && !loading){
                       return (
                         <div id="noData">
                           <h2>OOPS!</h2>
