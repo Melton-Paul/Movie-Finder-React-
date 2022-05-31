@@ -1,6 +1,7 @@
 import heroImg from "../images/heroimg.jpg"
 import React from "react"
 import MovieCard from "./MovieCard"
+import loadingImg from "../images/30+fps.gif"
 
 
 export default function FindFilms(props){
@@ -78,7 +79,7 @@ export default function FindFilms(props){
                   if(loading){
                     return ( 
                       <div id="noData">
-                        <img className="loading" src={props.loadingImg} />
+                        <img className="loading" src={loadingImg} />
                         <p>Fetching Movies</p>
                       </div> 
                     ) 
