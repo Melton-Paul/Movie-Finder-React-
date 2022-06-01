@@ -12,9 +12,9 @@ ReactDOM.render(
         <Routes>
             <Route path='/' element={<App />}>
                 <Route path="/watchlist" element={<Watchlist  />} />
+                <Route index element={<FindFilms />} />
                 <Route path="/findfilms" element={<FindFilms />} />
             </Route>
-
         </Routes>
     </BrowserRouter>
 
