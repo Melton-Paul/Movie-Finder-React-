@@ -2,16 +2,22 @@ import heroImg from "../images/heroimg.jpg"
 import React from "react"
 import MovieCard from "./MovieCard"
 import loadingImg from "../images/30+fps.gif"
+import { Link } from "react-router-dom"
+import usePageLogic from "../hooks/usePageLogic"
 
 
 
-export default function FindFilms(props){
+export default function FindFilms(){
     const [searchValue, setSearchValue] = React.useState("")
     const [searchMemory, setSearchMemory] = React.useState("")
     const [movies, setMovies] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [movieHtml, setMovieHtml] = React.useState("")
     const [error, setError] = React.useState(false)
+    const {
+      watchlistStorage, 
+      removeStorage, 
+      addStorage } =  usePageLogic()
     let typingTimer
 
 
@@ -53,7 +59,7 @@ export default function FindFilms(props){
         
         function getHTML(){
             const movieArr = movies.map(movie => {
-              return <MovieCard props={{...movie}} addStorage={props.addStorage} watchlistStorage={props.watchlistStorage} removeStorage={props.removeStorage} key={movie.imdbID} />})
+              return <MovieCard props={{...movie}} addStorage={addStorage} watchlistStorage={watchlistStorage} removeStorage={removeStorage} key={movie.imdbID} />})
             setMovieHtml(movieArr)
             }
 
@@ -104,7 +110,7 @@ export default function FindFilms(props){
                 <img className="hero-img" src={heroImg} />
                 <div className="hero-title">
                 <h1>Find your film</h1>
-                <h2 className="hero__watchlist"  onClick={()=>props.setWatchlistPage(prev => !prev)}>My Watchlist</h2>
+                <Link className="hero__watchlist link" to="/watchlist">My Watchlist</Link>
                 </div>
                 <div className="input-group">
                     <i className="fa fa-search"></i>

@@ -1,9 +1,14 @@
 import heroImg from "../images/heroimg.jpg"
 import React from "react"
+import { Link } from "react-router-dom"
 import MovieCard from "./MovieCard"
+import usePageLogic from "../hooks/usePageLogic"
 
-export default function Watchlist(props){
+export default function Watchlist(){
     const [watchlistHtml, setWatchlistHtml] = React.useState([])
+    const {
+        watchlistStorage, 
+        removeStorage} =  usePageLogic()
 
 
     React.useEffect(()=>{
@@ -14,10 +19,10 @@ export default function Watchlist(props){
                     setWatchlistHtml(prev => [...prev, data])
                 })
         })
-    }, [props.watchlistPage])
+    }, [])
 
     const html = watchlistHtml.map(movie => {
-        return <MovieCard props={{...movie}} removeStorage={props.removeStorage} watchlistStorage={props.watchlistStorage} />
+        return <MovieCard props={{...movie}} removeStorage={removeStorage} watchlistStorage={watchlistStorage} />
     })
 
 
@@ -28,17 +33,19 @@ export default function Watchlist(props){
             <img className="hero-img" src={heroImg} />
             <div className="hero-title">
             <h1>Your Watchlist</h1>
-            <h2 className="hero__watchlist" onClick={()=>props.setWatchlistPage(prev => !prev )}>Go back to finding films</h2>
+            <Link className="hero__watchlist link" to="/findfilms">Go back to finding films</Link>
             </div>
         </header>
         <main>
             {watchlistHtml.length > 0  ? 
                 html : 
-                <div id="noData" onClick={()=>props.setWatchlistPage(prev => !prev )}>
-                    <i className="fa fa-film fa-6x"></i>
-                    <p>Start Exploring</p>
-                    <p>No films in your list</p>
-                </div> }
+                <Link className="link" to="/findfilms">
+                    <div id="noData">
+                        <i className="fa fa-film fa-6x"></i>
+                        <p>Start Exploring</p>
+                        <p>No films in your list</p>
+                    </div>
+                </Link> }
         </main>
     </div>)
 }

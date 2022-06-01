@@ -1,7 +1,7 @@
 import React from "react"
 export default function MovieCard(props){
     const {Poster, Title, imdbRating, Runtime, Genre, Plot, imdbID} = props.props
-    const [watchlistStorage, setWatchlistStorage] = React.useState(props.watchlistStorage)
+    const [watchlistStorage] = React.useState(props.watchlistStorage)
     const [inWatchlist, setInWatchlist] = React.useState(watchlistStorage.includes(imdbID) ? true : false)
     function toggle(){
         setInWatchlist(prev => !prev)
