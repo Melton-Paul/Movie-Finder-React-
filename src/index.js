@@ -8,7 +8,7 @@ import Watchlist from "./components/Watchlist"
 
 
 ReactDOM.render(
-    <BrowserRouter history={browserHistory}>
+    <BrowserRouter>
         <Routes>
             <Route path='/' element={<App />}>
                 <Route path="/watchlist" element={<Watchlist  />} />
