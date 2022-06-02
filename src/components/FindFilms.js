@@ -3,21 +3,16 @@ import React from "react"
 import MovieCard from "./MovieCard"
 import loadingImg from "../images/30+fps.gif"
 import { Link } from "react-router-dom"
-import usePageLogic from "../hooks/usePageLogic"
 
 
 
-export default function FindFilms(){
+export default function FindFilms(props){
     const [searchValue, setSearchValue] = React.useState("")
     const [searchMemory, setSearchMemory] = React.useState("")
     const [movies, setMovies] = React.useState([])
     const [loading, setLoading] = React.useState(false)
     const [movieHtml, setMovieHtml] = React.useState("")
     const [error, setError] = React.useState(false)
-    const {
-      watchlistStorage, 
-      removeStorage, 
-      addStorage } =  usePageLogic()
     let typingTimer
 
 
@@ -59,7 +54,7 @@ export default function FindFilms(){
         
         function getHTML(){
             const movieArr = movies.map(movie => {
-              return <MovieCard props={{...movie}} addStorage={addStorage} watchlistStorage={watchlistStorage} removeStorage={removeStorage} key={movie.imdbID} />})
+              return <MovieCard props={{...movie}} addStorage={props.addStorage} watchlistStorage={props.watchlistStorage} removeStorage={props.removeStorage} key={movie.imdbID} />})
             setMovieHtml(movieArr)
             }
 

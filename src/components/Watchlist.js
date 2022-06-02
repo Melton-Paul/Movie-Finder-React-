@@ -2,13 +2,8 @@ import heroImg from "../images/heroimg.jpg"
 import React from "react"
 import { Link } from "react-router-dom"
 import MovieCard from "./MovieCard"
-import usePageLogic from "../hooks/usePageLogic"
-
-export default function Watchlist(){
+export default function Watchlist(props){
     const [watchlistHtml, setWatchlistHtml] = React.useState([])
-    const {
-        watchlistStorage, 
-        removeStorage} =  usePageLogic()
 
 
     React.useEffect(()=>{
@@ -22,7 +17,7 @@ export default function Watchlist(){
     }, [])
 
     const html = watchlistHtml.map(movie => {
-        return <MovieCard props={{...movie}} removeStorage={removeStorage} watchlistStorage={watchlistStorage} />
+        return <MovieCard props={{...movie}} removeStorage={props.removeStorage} watchlistStorage={props.watchlistStorage} />
     })
 
 
@@ -33,13 +28,13 @@ export default function Watchlist(){
             <img className="hero-img" src={heroImg} />
             <div className="hero-title">
             <h1>Your Watchlist</h1>
-            <Link className="hero__watchlist link" to="/findfilms">Go back to finding films</Link>
+            <Link className="hero__watchlist link" to="/">Go back to finding films</Link>
             </div>
         </header>
         <main>
             {watchlistHtml.length > 0  ? 
                 html : 
-                <Link className="link" to="/findfilms">
+                <Link className="link" to="/">
                     <div id="noData">
                         <i className="fa fa-film fa-6x"></i>
                         <p>Start Exploring</p>
