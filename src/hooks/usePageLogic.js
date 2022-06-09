@@ -2,6 +2,7 @@ import React from "react"
 
 export default function usePageLogic(){
     const [watchlistStorage, setWatchlistStorage] = React.useState(JSON.parse(window.localStorage.getItem("watchlist")) || [])
+
     
 
     function addStorage(id){
@@ -17,6 +18,11 @@ export default function usePageLogic(){
         setWatchlistStorage(arr)
         window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
     }
+
+
+
+
+
 
     window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
 

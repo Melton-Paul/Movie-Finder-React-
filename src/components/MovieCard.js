@@ -20,7 +20,7 @@ export default function MovieCard(props){
             <div className="movie-tags">
                 <p className="movie-tag movie-time clear__bottom">{Runtime}</p>
                 <p className="movie-tag movie-category clear__bottom">{Genre}</p>
-                <div className=" movie-tag watchlist-add " onClick={toggle} id="${imdbID}" >
+                <div className=" movie-tag watchlist-add " onClick={toggle} >
                 <i className="fa fa-plus"></i>
                 <p className="clear__bottom">{inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}</p>
                 </div>
