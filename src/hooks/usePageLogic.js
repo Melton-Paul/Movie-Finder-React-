@@ -9,8 +9,8 @@ export default function usePageLogic(){
         setWatchlistStorage(prev => {
             return [...prev, id]
         })
-        window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
     }
+    window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
 
     function removeStorage(id){
         const location = watchlistStorage.indexOf(id)

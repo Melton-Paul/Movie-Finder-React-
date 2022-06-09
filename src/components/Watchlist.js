@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import MovieCard from "./MovieCard"
 export default function Watchlist(props){
     const [watchlistHtml, setWatchlistHtml] = React.useState([])
+    console.log(localStorage)
 
 
     React.useEffect(()=>{
@@ -18,7 +19,7 @@ export default function Watchlist(props){
     }, [])
 
     const html = watchlistHtml.map(movie => {
-        return <MovieCard props={{...movie}} removeStorage={props.removeStorage} watchlistStorage={props.watchlistStorage} />
+        return <MovieCard key={movie.ImdbId} props={{...movie}} removeStorage={props.removeStorage} watchlistStorage={props.watchlistStorage} />
     })
 
 
