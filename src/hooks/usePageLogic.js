@@ -9,6 +9,7 @@ export default function usePageLogic(){
         setWatchlistStorage(prev => {
             return [...prev, id]
         })
+        window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
     }
 
     function removeStorage(id){
@@ -22,9 +23,6 @@ export default function usePageLogic(){
 
 
 
-
-
-    window.localStorage.setItem("watchlist", JSON.stringify(watchlistStorage))
 
     return {watchlistStorage, removeStorage, addStorage}
     

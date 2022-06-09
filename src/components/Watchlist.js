@@ -7,13 +7,14 @@ export default function Watchlist(props){
 
 
     React.useEffect(()=>{
+        if(window.localStorage.getItem("watchlist")){
         JSON.parse(window.localStorage.getItem("watchlist")).forEach(id => {
             fetch(`https://www.omdbapi.com/?apikey=9980ac75&i=${id}&`)
                 .then(res => res.json())
                 .then(data => {
                     setWatchlistHtml(prev => [...prev, data])
                 })
-        })
+        })}
     }, [])
 
     const html = watchlistHtml.map(movie => {

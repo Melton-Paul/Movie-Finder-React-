@@ -13,6 +13,7 @@ export default function FindFilms(props){
     const [loading, setLoading] = React.useState(false)
     const [movieHtml, setMovieHtml] = React.useState("")
     const [error, setError] = React.useState(false)
+    const [page, setPage] = React.useState(1)
     let typingTimer
 
 
@@ -21,7 +22,7 @@ export default function FindFilms(props){
         if(!searchValue){
           return 
         }
-          fetch(`https://www.omdbapi.com/?apikey=9980ac75&s=${searchValue}`)
+          fetch(`https://www.omdbapi.com/?apikey=9980ac75&s=${searchValue}&page=${page}`)
             .then(res => res.json())
             .then(data => {
                 if(data.Response === "False"){
@@ -31,7 +32,7 @@ export default function FindFilms(props){
                 }
               let movieList = []
               data.Search.forEach(movie=>{
-                fetch(`https://www.omdbapi.com/?apikey=9980ac75&t=${movie.Title}`)
+                fetch(`https://www.omdbapi.com/?apikey=9980ac75&t=${movie.Title}&plot=short`)
                 .then(res => res.json())
                 .then(data => {
                   if(movieList.some(movie => movie.imdbID === data.imdbID)){
@@ -49,7 +50,7 @@ export default function FindFilms(props){
               setError(true)
               console.log(err)
             })
-        }, [searchMemory, searchValue])
+        }, [searchMemory, searchValue, page])
 
         
         function getHTML(){
@@ -115,6 +116,12 @@ export default function FindFilms(props){
             </header>
             <main> 
                 {html()}
+                { movieHtml &&
+                <div className="btn-container">
+                  <button onClick={()=> setPage(prev => prev - 1)}>&lt;</button>
+                  <span>Page {page}</span>
+                  <button onClick={()=> setPage(prev => prev + 1)}>&gt;</button>
+                </div>}
             </main>
         </div>
     )

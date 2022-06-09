@@ -15,7 +15,7 @@ export default function App() {
       removeStorage, 
       addStorage,
      } =  usePageLogic()
-
+    const localData = localStorage.getItem("darkMode")
     const [darkMode, setDarkMode] = React.useState(JSON.parse(window.localStorage.getItem("darkMode")) || false)
     
      const findFilms = <FindFilms watchlistStorage={watchlistStorage} removeStorage={removeStorage} addStorage={addStorage} />
@@ -32,7 +32,7 @@ export default function App() {
       }
       window.localStorage.setItem("darkMode", JSON.stringify(darkMode))
      console.log(window.localStorage.getItem("darkMode"))
-
+      window.localStorage.clear()
     return (
       <>
         <button onClick={()=>setDarkMode(prev => !prev)} className="mode__toggle"><i className={`fa fa-solid ${darkMode ? "fa-moon" : "fa-sun"}`}></i><span style={styles} className="circle"></span></button>

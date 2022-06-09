@@ -115,6 +115,9 @@ main {
   position: relative;
   height: 100vh;
   padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 #noData {
   position: absolute;
@@ -148,6 +151,13 @@ main {
   width: 200px;
 }
 
+.btn-container {
+  margin: 0 auto;
+}
+.btn-container button {
+  margin: 1rem;
+}
+
 /* Movie Card */
 
 .movie-container {
@@ -158,6 +168,7 @@ main {
   padding-bottom: 2rem;
   padding-top: 2rem;
   color: var(--color-accent);
+  width: 100%;
 }
 
 .movie-header {
