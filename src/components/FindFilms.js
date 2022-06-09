@@ -88,7 +88,16 @@ export default function FindFilms(props){
                   </div> 
                 ) 
               } else {
-                return movieHtml
+                return (
+                  <>
+                  {movieHtml}
+                  <div className="btn-container">
+                    <button onClick={()=> setPage(prev => prev - 1)}>&lt;</button>
+                    <span>Page {page}</span>
+                    <button onClick={()=> setPage(prev => prev + 1)}>&gt;</button>
+                  </div>
+                  </>
+                  )
               }
               } else  {
                 return (
@@ -117,13 +126,15 @@ export default function FindFilms(props){
             </header>
             <main> 
                 {html()}
-                { movieHtml &&
-                <div className="btn-container">
-                  <button onClick={()=> setPage(prev => prev - 1)}>&lt;</button>
-                  <span>Page {page}</span>
-                  <button onClick={()=> setPage(prev => prev + 1)}>&gt;</button>
-                </div>}
             </main>
         </div>
     )
 }
+
+// setTimeout(() => {
+//   return (
+//   <div className="btn-container">
+//     <button onClick={()=> setPage(prev => prev - 1)}>&lt;</button>
+//     <span>Page {page}</span>
+//     <button onClick={()=> setPage(prev => prev + 1)}>&gt;</button>
+//   </div>)}, 2700)

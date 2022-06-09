@@ -1,6 +1,6 @@
 import React from "react"
 export default function MovieCard(props){
-    const {Poster, Title, imdbRating, Runtime, Genre, Plot, imdbID} = props.props
+    const {Poster, Title, imdbRating, Runtime, Genre, Plot, imdbID, Year} = props.props
     const [watchlistStorage] = React.useState(props.watchlistStorage)
     const [inWatchlist, setInWatchlist] = React.useState(watchlistStorage.includes(imdbID) ? true : false)
     function toggle(){
@@ -16,6 +16,7 @@ export default function MovieCard(props){
                 <h2 className="movie-title clear__bottom">{Title}</h2>
                 <i className="fa fa-star clear__bottom"></i>
                 <p className="movie-rating clear__bottom">{imdbRating}</p>
+                <h3 className="movie-year clear__bottom">{Year}</h3>
             </div>
             <div className="movie-tags">
                 <p className="movie-tag movie-time clear__bottom">{Runtime}</p>

@@ -184,7 +184,7 @@ main {
   align-items: center;
 }
 .movie-header .fa-star {
-  margin: 0 0.3rem 0.8rem 0.6rem;
+  margin: 0 0.3rem 0.8rem 0.8rem;
   margin-top: 0.8rem;
   color: gold;
 }
@@ -198,6 +198,11 @@ main {
 }
 .movie-tag {
   margin-right: 0.2rem;
+}
+.movie-year {
+  margin-left: 1rem;
+  opacity: 0.5;
+  font-size: 0.9rem;
 }
 
 .movie-img {
