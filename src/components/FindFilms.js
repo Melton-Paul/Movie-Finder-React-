@@ -58,51 +58,51 @@ export default function FindFilms(props){
             setMovieHtml(movieArr)
             }
 
-            function handleChange(e){
-                const search = e.target.value
-                clearTimeout(typingTimer)
-                setLoading(true)
-                setSearchValue(search)
-                typingTimer = setTimeout(()=>{ 
-                  setSearchMemory(searchValue)
-                  setLoading(false)
-                }, 2500)
+        function handleChange(e){
+            const search = e.target.value
+            clearTimeout(typingTimer)
+            setLoading(true)
+            setSearchValue(search)
+            typingTimer = setTimeout(()=>{ 
+              setSearchMemory(searchValue)
+              setLoading(false)
+            }, 2500)
+          }
+          function html(){ 
+              if(error && !loading){
+                  return (
+                    <div id="noData">
+                      <h2>OOPS!</h2>
+                      <p>Nothing was found, check your spelling!</p>
+                    </div>
+                  )
               }
-              function html(){ 
-                  if(error && !loading){
-                      return (
-                        <div id="noData">
-                          <h2>OOPS!</h2>
-                          <p>Nothing was found, check your spelling!</p>
-                        </div>
-                      )
-                  }
-                if(searchValue){
-                  if(loading){
-                    return ( 
-                      <div id="noData">
-                        <img className="loading" src={loadingImg} />
-                        <p>Fetching Movies</p>
-                      </div> 
-                    ) 
-                  } else {
-                    return movieHtml
-                  }
-                  } else  {
-                    return (
-                      <div id="noData">
-                        <i className="fa fa-film fa-6x"></i>
-                        <p>Start Exploring</p>
-                      </div>
-                    )
-              }}
+            if(searchValue){
+              if(loading){
+                return ( 
+                  <div id="noData">
+                    <img className="loading" src={loadingImg} alt=""/>
+                    <p>Fetching Movies</p>
+                  </div> 
+                ) 
+              } else {
+                return movieHtml
+              }
+              } else  {
+                return (
+                  <div id="noData">
+                    <i className="fa fa-film fa-6x"></i>
+                    <p>Start Exploring</p>
+                  </div>
+                )
+          }}
 
         
 
     return (
         <div className="findfilms-page">
             <header className="header">
-                <img className="hero-img" src={heroImg} />
+                <img className="hero-img" src={heroImg} alt="" />
                 <div className="hero-title">
                 <h1>Find your film</h1>
                 <Link className="hero__watchlist link" to="/watchlist">My Watchlist</Link>

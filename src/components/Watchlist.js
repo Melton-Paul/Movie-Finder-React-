@@ -25,7 +25,7 @@ export default function Watchlist(props){
     return (
     <div className="watchlist-page">
         <header className="header">
-            <img className="hero-img" src={heroImg} />
+            <img className="hero-img" src={heroImg} alt="" />
             <div className="hero-title">
             <h1>Your Watchlist</h1>
             <Link className="hero__watchlist link" to="/">Go back to finding films</Link>
