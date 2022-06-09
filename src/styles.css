@@ -156,6 +156,14 @@ main {
 }
 .btn-container button {
   margin: 1rem;
+  border-radius: 20%;
+  border: none;
+  background: rgb(203, 204, 182);
+  color: black;
+  cursor: pointer;
+}
+.btn-container span {
+  color: var(--color-accent);
 }
 
 /* Movie Card */

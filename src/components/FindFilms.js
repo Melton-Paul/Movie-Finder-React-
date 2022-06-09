@@ -52,6 +52,7 @@ export default function FindFilms(props){
             })
         }, [searchMemory, searchValue, page])
 
+        window.scrollTo(0, 0)
         
         function getHTML(){
             const movieArr = movies.map(movie => {
