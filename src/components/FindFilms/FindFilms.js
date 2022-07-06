@@ -1,5 +1,5 @@
 import heroImg from "../../images/heroimg.jpg";
-import React, { useCallback } from "react";
+import React from "react";
 import MovieCard from "../MovieCard";
 import loadingImg from "../../images/30+fps.gif";
 import { Link } from "react-router-dom";
@@ -27,6 +27,7 @@ export default function FindFilms(props) {
       .then((data) => {
         console.log(data);
         if (data.Response === "False") {
+          setLoading(false);
           throw Error("No Movie Found");
         } else {
           setError(false);
@@ -69,7 +70,6 @@ export default function FindFilms(props) {
   });
 
   window.scrollTo(0, 0);
-
   function html() {
     if (error && !loading) {
       return (
