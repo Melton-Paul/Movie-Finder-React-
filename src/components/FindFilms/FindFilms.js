@@ -1,28 +1,31 @@
-import heroImg from "../images/heroimg.jpg";
-import React from "react";
-import MovieCard from "./MovieCard";
-import loadingImg from "../images/30+fps.gif";
+import heroImg from "../../images/heroimg.jpg";
+import React, { useCallback } from "react";
+import MovieCard from "../MovieCard";
+import loadingImg from "../../images/30+fps.gif";
 import { Link } from "react-router-dom";
+import SearchInput from "./SearchInput";
 
 export default function FindFilms(props) {
-  const [searchValue, setSearchValue] = React.useState("");
-  const [searchMemory, setSearchMemory] = React.useState("");
   const [movies, setMovies] = React.useState([]);
+  const [searchMemory, setSearchMemory] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const [movieHtml, setMovieHtml] = React.useState("");
   const [error, setError] = React.useState(false);
   const [page, setPage] = React.useState(1);
-  let typingTimer;
+  console.log(searchMemory);
 
   React.useEffect(() => {
-    if (!searchValue) {
+    if (!searchMemory) {
       return;
     }
+
+    setLoading(true);
+
     fetch(
-      `https://www.omdbapi.com/?apikey=9980ac75&s=${searchValue}&page=${page}`
+      `https://www.omdbapi.com/?apikey=9980ac75&s=${searchMemory}&page=${page}`
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.Response === "False") {
           throw Error("No Movie Found");
         } else {
@@ -35,49 +38,38 @@ export default function FindFilms(props) {
           )
             .then((res) => res.json())
             .then((data) => {
-              if (movieList.some((movie) => movie.imdbID === data.imdbID)) {
-                return;
-              } else {
-                movieList.push(data);
-                setMovies(movieList);
-                getHTML();
-              }
+              setMovies((prev) => {
+                return [...prev, data];
+              });
             });
         });
+        setMovies(movieList);
+        setLoading(false);
       })
       .catch((err) => {
         setError(true);
         console.log(err);
       });
-  }, [searchMemory, searchValue, page]);
+  }, [searchMemory, page]);
+
+  const filteredArr = Array.from(new Set(movies.map(JSON.stringify))).map(
+    JSON.parse
+  );
+
+  const movieHtml = filteredArr.map((movie) => {
+    return (
+      <MovieCard
+        props={{ ...movie }}
+        addStorage={props.addStorage}
+        watchlistStorage={props.watchlistStorage}
+        removeStorage={props.removeStorage}
+        key={movie.imdbID}
+      />
+    );
+  });
 
   window.scrollTo(0, 0);
 
-  function getHTML() {
-    const movieArr = movies.map((movie) => {
-      return (
-        <MovieCard
-          props={{ ...movie }}
-          addStorage={props.addStorage}
-          watchlistStorage={props.watchlistStorage}
-          removeStorage={props.removeStorage}
-          key={movie.imdbID}
-        />
-      );
-    });
-    setMovieHtml(movieArr);
-  }
-
-  function handleChange(e) {
-    const search = e.target.value;
-    clearTimeout(typingTimer);
-    setLoading(true);
-    setSearchValue(search);
-    typingTimer = setTimeout(() => {
-      setSearchMemory(searchValue);
-      setLoading(false);
-    }, 2500);
-  }
   function html() {
     if (error && !loading) {
       return (
@@ -87,7 +79,7 @@ export default function FindFilms(props) {
         </div>
       );
     }
-    if (searchValue) {
+    if (searchMemory) {
       if (loading) {
         return (
           <div id="noData">
@@ -127,30 +119,9 @@ export default function FindFilms(props) {
             My Watchlist
           </Link>
         </div>
-        <div className="input-group">
-          <i className="fa fa-search"></i>
-          <input
-            type="text"
-            id="searchBar"
-            placeholder="What are you looking for?"
-            value={searchValue}
-            onChange={handleChange}
-            autoFocus
-          />
-          <button className="btn" type="submit" id="searchBtn">
-            Search
-          </button>
-        </div>
+        <SearchInput setSearchMemory={setSearchMemory} />
       </header>
       <main>{html()}</main>
     </div>
   );
 }
-
-// setTimeout(() => {
-//   return (
-//   <div className="btn-container">
-//     <button onClick={()=> setPage(prev => prev - 1)}>&lt;</button>
-//     <span>Page {page}</span>
-//     <button onClick={()=> setPage(prev => prev + 1)}>&gt;</button>
-//   </div>)}, 2700)

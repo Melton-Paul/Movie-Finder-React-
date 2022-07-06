@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
 export default function Watchlist(props) {
   const [watchlistHtml, setWatchlistHtml] = React.useState([]);
-  console.log(localStorage);
 
   React.useEffect(() => {
     if (window.localStorage.getItem("watchlist")) {

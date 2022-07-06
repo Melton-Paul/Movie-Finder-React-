@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import FindFilms from "./components/FindFilms";
+import FindFilms from "./components/FindFilms/FindFilms";
 import Watchlist from "./components/Watchlist";
 import usePageLogic from "./hooks/usePageLogic";
 
