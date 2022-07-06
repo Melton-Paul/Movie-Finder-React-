@@ -11,7 +11,7 @@ export default function SearchInput({ setSearchMemory, getMovies }) {
   React.useEffect(() => {
     const typingTimer = setTimeout(() => {
       setSearchMemory(searchValue);
-    }, 500);
+    }, 900);
 
     return () => {
       clearTimeout(typingTimer);

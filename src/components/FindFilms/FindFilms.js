@@ -11,7 +11,6 @@ export default function FindFilms(props) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [page, setPage] = React.useState(1);
-  console.log(searchMemory);
 
   React.useEffect(() => {
     if (!searchMemory) {
@@ -25,14 +24,12 @@ export default function FindFilms(props) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.Response === "False") {
           setLoading(false);
           throw Error("No Movie Found");
         } else {
           setError(false);
         }
-        let movieList = [];
         data.Search.forEach((movie) => {
           fetch(
             `https://www.omdbapi.com/?apikey=9980ac75&t=${movie.Title}&plot=short`
@@ -44,7 +41,6 @@ export default function FindFilms(props) {
               });
             });
         });
-        setMovies(movieList);
         setLoading(false);
       })
       .catch((err) => {

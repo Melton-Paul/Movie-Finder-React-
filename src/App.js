@@ -6,7 +6,6 @@ import usePageLogic from "./hooks/usePageLogic";
 
 export default function App() {
   const { watchlistStorage, removeStorage, addStorage } = usePageLogic();
-  const localData = localStorage.getItem("darkMode");
   const [darkMode, setDarkMode] = React.useState(
     JSON.parse(window.localStorage.getItem("darkMode")) || false
   );
@@ -23,7 +22,6 @@ export default function App() {
     right: darkMode ? "50%" : "4%",
   };
 
-  console.log(localStorage);
   if (darkMode) {
     document.body.classList.add("dark");
   } else {
