@@ -5,6 +5,8 @@ import loadingImg from "../../images/30+fps.gif";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
 
+window.scrollTo(0, 0);
+
 export default function FindFilms(props) {
   const [movies, setMovies] = React.useState([]);
   const [searchMemory, setSearchMemory] = React.useState("");
@@ -65,7 +67,6 @@ export default function FindFilms(props) {
     );
   });
 
-  window.scrollTo(0, 0);
   function html() {
     if (error && !loading) {
       return (
