@@ -5,14 +5,17 @@ import loadingImg from "../../images/30+fps.gif";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
 
-window.scrollTo(0, 0);
-
 export default function FindFilms(props) {
   const [movies, setMovies] = React.useState([]);
   const [searchMemory, setSearchMemory] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [page, setPage] = React.useState(1);
+  window.scrollTo(0, 0);
+
+  React.useEffect(() => {
+    setPage(1);
+  }, [searchMemory]);
 
   React.useEffect(() => {
     if (!searchMemory) {
@@ -21,6 +24,7 @@ export default function FindFilms(props) {
 
     setLoading(true);
 
+    setMovies([]);
     fetch(
       `https://www.omdbapi.com/?apikey=9980ac75&s=${searchMemory}&page=${page}`
     )
