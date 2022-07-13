@@ -11,7 +11,6 @@ export default function FindFilms(props) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [page, setPage] = React.useState(1);
-  window.scrollTo(0, 0);
 
   React.useEffect(() => {
     setPage(1);
@@ -21,6 +20,7 @@ export default function FindFilms(props) {
     if (!searchMemory) {
       return;
     }
+    window.scrollTo(0, 0);
 
     setLoading(true);
 
