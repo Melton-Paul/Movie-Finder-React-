@@ -16,7 +16,7 @@ export default function SearchInput({ setSearchMemory, getMovies }) {
     return () => {
       clearTimeout(typingTimer);
     };
-  }, [searchValue, getMovies]);
+  }, [searchValue, getMovies, setSearchMemory]);
 
   return (
     <div className="input-group">
