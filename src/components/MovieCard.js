@@ -1,4 +1,5 @@
 import React from "react";
+import NoMovie from "../images/nomovie.jpg";
 export default function MovieCard(props) {
   const { Poster, Title, imdbRating, Runtime, Genre, Plot, imdbID, Year } =
     props.props;
@@ -13,7 +14,11 @@ export default function MovieCard(props) {
 
   return (
     <div className="movie-container container">
-      <img className="movie-img" src={Poster} alt="A poster of the movie" />
+      <img
+        className="movie-img"
+        src={Poster !== "N/A" ? Poster : NoMovie}
+        alt="A poster of the movie"
+      />
       <div className="movie-content">
         <div className="movie-header">
           <h2 className="movie-title clear__bottom">{Title}</h2>
