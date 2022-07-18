@@ -37,7 +37,7 @@ export default function FindFilms(props) {
         } else {
           setError(false);
         }
-        setTotalPages(data.totalResults / 10);
+        setTotalPages(Math.ceil(data.totalResults / 10));
         data.Search.forEach((movie) => {
           fetch(
             `https://www.omdbapi.com/?apikey=9980ac75&t=${movie.Title}&plot=short`
