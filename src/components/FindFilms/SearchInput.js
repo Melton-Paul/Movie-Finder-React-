@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SearchInput({ setSearchMemory, getMovies }) {
+export default function SearchInput({ setSearchMemory }) {
   const [searchValue, setSearchValue] = React.useState("");
 
   function handleChange(e) {
@@ -16,7 +16,7 @@ export default function SearchInput({ setSearchMemory, getMovies }) {
     return () => {
       clearTimeout(typingTimer);
     };
-  }, [searchValue, getMovies, setSearchMemory]);
+  }, [searchValue, setSearchMemory]);
 
   return (
     <div className="input-group">

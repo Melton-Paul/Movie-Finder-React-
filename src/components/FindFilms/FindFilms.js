@@ -11,6 +11,7 @@ export default function FindFilms(props) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [page, setPage] = React.useState(1);
+  const [totalPages, setTotalPages] = React.useState(0);
 
   React.useEffect(() => {
     setPage(1);
@@ -36,6 +37,7 @@ export default function FindFilms(props) {
         } else {
           setError(false);
         }
+        setTotalPages(data.totalResults / 10);
         data.Search.forEach((movie) => {
           fetch(
             `https://www.omdbapi.com/?apikey=9980ac75&t=${movie.Title}&plot=short`
@@ -70,6 +72,7 @@ export default function FindFilms(props) {
       />
     );
   });
+  console.log(totalPages);
 
   function html() {
     if (error && !loading) {
@@ -94,9 +97,12 @@ export default function FindFilms(props) {
             {movieHtml}
             <div className="btn-container">
               <button onClick={() => setPage((prev) => prev - 1)}>&lt;</button>
-              <span>Page {page}</span>
+              <span>
+                Page {page} of {totalPages}
+              </span>
               <button onClick={() => setPage((prev) => prev + 1)}>&gt;</button>
             </div>
+            {page > 1 && <p onClick={() => setPage(1)}>Go Back To Page One</p>}
           </>
         );
       }
